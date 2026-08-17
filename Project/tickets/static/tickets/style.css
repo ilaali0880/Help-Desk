@@ -41,25 +41,25 @@ body {
 .page-detail {
     background-image:
         linear-gradient(135deg, rgba(142,68,173,0.75), rgba(192,132,252,0.75)),
-        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=60');
+        url('images/p2.jpg');
 }
 
 .page-create {
     background-image:
         linear-gradient(135deg, rgba(17,153,142,0.75), rgba(56,239,125,0.75)),
-        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=60');
+        url('images/p3.jpg');
 }
 
 .page-login {
     background-image:
         linear-gradient(135deg, rgba(22,160,133,0.75), rgba(72,209,204,0.75)),
-        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=60');
+        url('images/p4.png');
 }
 
 .page-dashboard {
     background-image:
         linear-gradient(135deg, rgba(230,92,0,0.75), rgba(249,212,35,0.75)),
-        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1600&q=60');
+        url('images/p5.png');
 }
 
 /* ---------- Navbar شیشه‌ای ---------- */

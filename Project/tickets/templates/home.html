@@ -1,14 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-<h1><title>Main Page</title></h1>
+{% extends 'base.html' %}
+{% block title %}لیست تیکت‌ها{% endblock %}
+{% block page_class %}page-home{% endblock %}
 
-<h>Wellcome!!!!</h>
-{for ticket_list in ticket_lists}
-<h2>{ ticket_list.object }</h2>
-{ end for }
+{% block content %}
+   <h2><i class="fa-solid fa-ticket"></i> لیست تیکت‌ها</h2>
 
-</head>
-<body>
-</body>
-</html>
+    <form method="get" class="filter-form">
+        <input type="text" name="q" placeholder="جستجو در عنوان..." value="{{ request.GET.q }}">
+        <select name="status">
+            <option value="">همه وضعیت‌ها</option>
+            {% for value, label in status_choices %}
+                <option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">اعمال فیلتر</button>
+    </form>
+
+    {% for ticket in tickets %}
+        <div class="ticket-item">
+            <a href="{% url 'detail' ticket.id %}">{{ ticket }}</a>
+            <span class="badge badge-{{ ticket.status }}">{{ ticket.get_status_display }}</span>
+        </div>
+    {% empty %}
+        <p>هیچ تیکتی پیدا نشد.</p>
+    {% endfor %}
+{% endblock %}

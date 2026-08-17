@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}{{ detail.title }}{% endblock %}
+{% block page_class %}page-detail{% endblock %}
+
+{% block content %}
+    <a href="{% url 'home' %}">← بازگشت به لیست</a>
+
+    <h1>{{ detail.title }}</h1>
+    <span class="badge badge-{{ detail.status }}">{{ detail.get_status_display }}</span>
+
+    <p><strong>اولویت:</strong> {{ detail.get_priority_display }}</p>
+    <p><strong>دسته‌بندی:</strong> {{ detail.get_category_display }}</p>
+    <p><strong>ثبت‌کننده:</strong> {{ detail.requester }}</p>
+    <p><strong>کارشناس مسئول:</strong> {% if detail.assigned_to %}{{ detail.assigned_to }}{% else %}تخصیص داده نشده{% endif %}</p>
+    <p>{{ detail.description }}</p>
+
+    {% if is_agent %}
+        <h3>تغییر وضعیت</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ status_form.as_p }}
+            <button type="submit" name="status_submit">بروزرسانی وضعیت</button>
+        </form>
+
+        <h3>تخصیص کارشناس</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ assign_form.as_p }}
+            <button type="submit" name="assign_submit">تخصیص</button>
+        </form>
+    {% endif %}
+
+    <h3>نظرات</h3>
+    {% for c in detail.comment.all %}
+        <div class="comment-box">
+            <p>{{ c.message }}</p>
+            <p class="comment-meta">{{ c.author }} — {{ c.created_at }}</p>
+        </div>
+    {% empty %}
+        <p>هنوز نظری ثبت نشده.</p>
+    {% endfor %}
+
+    <h3>افزودن نظر</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="comment_submit">ارسال</button>
+    </form>
+{% endblock %}

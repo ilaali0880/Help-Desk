@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Help-Desk IT{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'tickets/style.css' %}">
+    
+</head>
+<body class="{% block page_class %}{% endblock %}">
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="{% url 'home' %}" class="nav-brand">
+            <i class="fa-solid fa-headset"></i> Help-Desk IT
+        </a>
+        <div class="nav-links">
+            {% if is_agent %}
+                <a href="{% url 'dashboard' %}"><i class="fa-solid fa-chart-pie"></i> داشبورد</a>
+            {% endif %}
+            <a href="{% url 'home' %}"><i class="fa-solid fa-list-check"></i> لیست تیکت‌ها</a>
+            <a href="{% url 'create' %}" class="nav-cta"><i class="fa-solid fa-plus"></i> تیکت جدید</a>
+            {% if user.is_authenticated %}
+                <span class="nav-user"><i class="fa-regular fa-circle-user"></i> {{ user.username }}</span>
+                <form method="post" action="{% url 'logout' %}" class="nav-logout-form">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-logout"><i class="fa-solid fa-right-from-bracket"></i> خروج</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

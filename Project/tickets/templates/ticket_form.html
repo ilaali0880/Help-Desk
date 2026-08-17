@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}ثبت تیکت جدید{% endblock %}
+{% block page_class %}page-create{% endblock %}
+
+{% block content %}
+    <a href="{% url 'home' %}">← بازگشت به لیست</a>
+    <h2><i class="fa-solid fa-circle-plus"></i> ثبت تیکت جدید</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">ثبت تیکت</button>
+    </form>
+{% endblock %}

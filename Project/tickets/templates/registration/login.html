@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ورود</title>
+    <link rel="stylesheet" href="{% static 'tickets/style.css' %}">
+</head>
+<body class="page-login">
+    <div class="page-wrapper">
+        <div class="container">
+            <h2>🎫 ورود به هلپ‌دسک IT</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">ورود</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

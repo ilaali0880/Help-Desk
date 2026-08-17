@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}داشبورد{% endblock %}
+{% block page_class %}page-dashboard{% endblock %}
+
+{% block content %}
+    <h2><i class="fa-solid fa-chart-pie"></i> داشبورد آماری</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card stat-total">
+            <div class="stat-number">{{ total }}</div>
+            <div class="stat-label">کل تیکت‌ها</div>
+        </div>
+        <div class="stat-card stat-open">
+            <div class="stat-number">{{ open_count }}</div>
+            <div class="stat-label">باز</div>
+        </div>
+        <div class="stat-card stat-inprogress">
+            <div class="stat-number">{{ inprogress_count }}</div>
+            <div class="stat-label">در حال بررسی</div>
+        </div>
+        <div class="stat-card stat-resolved">
+            <div class="stat-number">{{ resolved_count }}</div>
+            <div class="stat-label">حل شده</div>
+        </div>
+        <div class="stat-card stat-closed">
+            <div class="stat-number">{{ closed_count }}</div>
+            <div class="stat-label">بسته شده</div>
+        </div>
+        <div class="stat-card stat-unassigned">
+            <div class="stat-number">{{ unassigned_count }}</div>
+            <div class="stat-label">بدون کارشناس</div>
+        </div>
+    </div>
+
+    <h3>بر اساس دسته‌بندی</h3>
+    <ul class="category-list">
+        <li>سخت‌افزار: <strong>{{ hardware_count }}</strong></li>
+        <li>نرم‌افزار: <strong>{{ software_count }}</strong></li>
+        <li>شبکه: <strong>{{ network_count }}</strong></li>
+        <li>سایر: <strong>{{ other_count }}</strong></li>
+    </ul>
+
+    <h3>۵ تیکت اخیر</h3>
+    {% for ticket in recent_tickets %}
+        <div class="ticket-item">
+            <a href="{% url 'detail' ticket.id %}">{{ ticket }}</a>
+            <span class="badge badge-{{ ticket.status }}">{{ ticket.get_status_display }}</span>
+        </div>
+    {% endfor %}
+{% endblock %}

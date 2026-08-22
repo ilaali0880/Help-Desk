@@ -21,11 +21,16 @@ def ticket_list(request):
     if q:
         ticket_lists = ticket_lists.filter(title__icontains=q)
 
-    return render(request, 'home.html', {
+    context = {
         'tickets': ticket_lists,
         'status_choices': Ticket.Status.choices,
         'is_agent': user_is_agent,
-    })
+    }
+
+    if request.GET.get('ajax'):
+        return render(request, 'partials/ticket_list_partial.html', context)
+
+    return render(request, 'home.html', context)
 
 
 @login_required

@@ -1,0 +1,8 @@
+{% for ticket in tickets %}
+    <div class="ticket-item">
+        <a href="{% url 'detail' ticket.id %}">{{ ticket }}</a>
+        <span class="badge badge-{{ ticket.status }}">{{ ticket.get_status_display }}</span>
+    </div>
+{% empty %}
+    <p>هیچ تیکتی پیدا نشد.</p>
+{% endfor %}
